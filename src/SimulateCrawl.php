@@ -36,7 +36,7 @@ class SimulateCrawl
     public function run()
     {
         try {
-            echo '<pre>';
+            echo '<pre>' . PHP_EOL;
 
             $this->gotoLoginPage();
 

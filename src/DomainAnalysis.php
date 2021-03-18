@@ -38,7 +38,7 @@ class DomainAnalysis
         $this->domain = $domain;
         $this->domainMain = explode('.', $domain)[0];
 
-        echo "<pre>";
+        echo '<pre>' . PHP_EOL;
         echo "域名主体：" . $this->domainMain . PHP_EOL;
     }
 

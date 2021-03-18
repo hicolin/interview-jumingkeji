@@ -26,7 +26,7 @@ class DomainRegister
     public function run()
     {
         try {
-            echo '<pre>';
+            echo '<pre>' . PHP_EOL;
 
             $this -> checkDomain();
 
