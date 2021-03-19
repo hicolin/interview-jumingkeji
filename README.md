@@ -24,8 +24,7 @@
      代码越精简越好。不要使用 `composer`。 
     
     
- 2. 域名注册接口：  
-     `https://help.aliyun.com/document_detail/42875.html?spm=5176.10609282.905295.30.6a8c3801SNHxGM`
+ 2. 域名注册接口：`https://help.aliyun.com/document_detail/42875.html`
 
 
    
