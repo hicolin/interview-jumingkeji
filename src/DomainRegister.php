@@ -3,14 +3,14 @@
 class DomainRegister
 {
     // 阿里云
-    public $domain = 'https://domain.aliyuncs.com';
-    public $accessKeyId = 'xxx';
-    public $accessKeySecret = 'xxx';
+    private $domain = 'https://domain.aliyuncs.com';
+    private $accessKeyId = 'xxx';
+    private $accessKeySecret = 'xxx';
 
-    public $commonUrl;
-    public $signatureUrl;
-    public $commonData;
-    public $domainName;
+    private $commonUrl;
+    private $signatureUrl;
+    private $commonData;
+    private $domainName;
 
     public function __construct($domainName)
     {
@@ -38,7 +38,7 @@ class DomainRegister
     }
 
     // 拼接公共 Url
-    public function getCommonUrl()
+    private function getCommonUrl()
     {
         // 不包括 Signature
         $commonData = [
@@ -61,7 +61,7 @@ class DomainRegister
      *
      * @throws Exception
      */
-    public function checkDomain()
+    private function checkDomain()
     {
         $checkData = [
             'Action' => 'CheckDomain',
@@ -96,7 +96,7 @@ class DomainRegister
      *
      * @throws Exception
      */
-    public function createOrder()
+    private function createOrder()
     {
         $orderData = [
             'Action' => 'CreateOrder',
@@ -127,14 +127,14 @@ class DomainRegister
     }
 
     // 获取签名后的 Url
-    public function getSignatureUrl($data): string
+    private function getSignatureUrl($data): string
     {
         $signature = $this->getSignature($data);
         return $this->commonUrl . '&Signature=' . $signature;
     }
 
     // 获取签名
-    public function getSignature($params): string
+    private function getSignature($params): string
     {
         ksort($params);
         $queryStr = '';
@@ -150,7 +150,7 @@ class DomainRegister
     }
 
     // 编码
-    public function percentEncode($str)
+    private function percentEncode($str)
     {
         $res = urlencode($str);
 

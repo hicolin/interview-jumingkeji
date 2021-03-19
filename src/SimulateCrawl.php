@@ -3,21 +3,19 @@
 class SimulateCrawl
 {
     // 百度 OCR
-    public $appKey = 'MULrmCc0jhSby1Bc21ltPX28';
-    public $secretKey = '6xNQ2zr3vMIB0i8Mq9GhmUczcUeDTkdS';
-    public $accessToken;
+    private $appKey = 'MULrmCc0jhSby1Bc21ltPX28';
+    private $secretKey = '6xNQ2zr3vMIB0i8Mq9GhmUczcUeDTkdS';
+    private $accessToken;
 
     // 橙米帐户
-    public $domain = 'https://www.chengmi.cn';
-    public $username;
-    public $password;
+    private $domain = 'https://www.chengmi.cn';
+    private $username;
+    private $password;
 
-    public $loginToken;
-    public $imgPath;
-    public $captcha;
-    public $cookie;
-    public $pageContent;
-
+    private $loginToken;
+    private $imgPath;
+    private $captcha;
+    private $cookie;
 
     public function __construct($username, $password)
     {
@@ -49,7 +47,6 @@ class SimulateCrawl
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-
     }
 
     /**
@@ -57,7 +54,7 @@ class SimulateCrawl
      *
      * @throws Exception
      */
-    public function downloadCaptcha()
+    private function downloadCaptcha()
     {
         $captchaUrl = $this->domain . '/member/code.aspx';
         $uploadDir = __DIR__ . '/uploads/images/' . date('Y-m-d');
@@ -81,7 +78,7 @@ class SimulateCrawl
      *
      * @throws Exception
      */
-    public function getAccessToken()
+    private function getAccessToken()
     {
         $tokenUrl = 'https://aip.baidubce.com/oauth/2.0/token';
         $data = [
@@ -103,7 +100,7 @@ class SimulateCrawl
      *
      * @throws Exception
      */
-    public function getCaptcha()
+    private function getCaptcha()
     {
         if (!$this->accessToken) {
             throw new Exception('accessToken 不存在');
@@ -150,7 +147,7 @@ class SimulateCrawl
      *
      * @throws Exception
      */
-    public function gotoLoginPage()
+    private function gotoLoginPage()
     {
         $loginUrl = $this->domain;
         $cookieDir = __DIR__ . '/cookie';
@@ -173,7 +170,7 @@ class SimulateCrawl
      *
      * @throws Exception
      */
-    public function login()
+    private function login()
     {
         $res = '';
         $loginUrl = $this->domain . '/member/ajax/User.ashx';
@@ -204,15 +201,15 @@ class SimulateCrawl
     }
 
     // 获取余额
-    public function getBalance()
+    private function getBalance()
     {
         $userHomeUrl = $this->domain . '/userpanel';
         $res = Request::get($userHomeUrl, $this->cookie);
 
-        $this->pageContent = $res;
+        $pageContent = $res;
 
         $pattern = "/<td height=\"36\" align=\"center\" class=\"hsac\" style=\"font-size: 18px;\">\s*(.*)\s*<\/td>/";
-        preg_match_all($pattern, $this->pageContent, $matches);
+        preg_match_all($pattern, $pageContent, $matches);
 
         echo '获取账户余额成功：' . $matches[1][0] . PHP_EOL;
     }

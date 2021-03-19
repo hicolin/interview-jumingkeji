@@ -2,11 +2,11 @@
 
 class DomainAnalysis
 {
-    public $domain;
-    public $domainMain;
+    private $domain;
+    private $domainMain;
 
     // 所有的拼音集合
-    public $pinYinArr= [
+    private $pinYinArr= [
         "a","ai","an","ang","ao",
         "ba","bai","ban","bang","bao","be","bei","ben","beng","bi","bian","biao","bie","bin","bing","bo","bu",
         "ca","cai","can","cang","cao","ce","cen","ceng","cha","chai","chan","chang","chao","che","chen","cheng","chi","chong","chou","chu","chua","chuai","chuan","chuang","chui","chun","chuo","ci","cong","cou","cu","cuan","cui","cun","cuo",
@@ -55,7 +55,7 @@ class DomainAnalysis
     }
 
     // 数字
-    public function isNumeric()
+    private function isNumeric()
     {
         if (is_numeric($this->domainMain)) {
             echo '数字域名' . PHP_EOL;
@@ -65,7 +65,7 @@ class DomainAnalysis
     }
 
     // 字母
-    public function isCharacter()
+    private function isCharacter()
     {
         if (preg_match("/^[a-z]+$/", $this->domainMain)) {
             echo '字母域名' . PHP_EOL;
@@ -75,7 +75,7 @@ class DomainAnalysis
     }
 
     // 杂米
-    public function isZaMi()
+    private function isZaMi()
     {
         if (preg_match("/(?=.*\d+)(?=.*[a-z]+){2,63}/", $this->domainMain)) {
             echo '杂米域名' . PHP_EOL;
@@ -85,7 +85,7 @@ class DomainAnalysis
     }
 
     // 拼音检测
-    public function checkPinYin()
+    private function checkPinYin()
     {
         $isPinYin = true;
         $count = 0;
